@@ -6,6 +6,7 @@ import LoginStyle from '../styles/LoginStyles';
 const LoginScreen = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordVisible, setPasswordVisible] = useState(false);
     const navigation = useNavigation(); 
 
     const handleLogin = () => {
@@ -14,6 +15,10 @@ const LoginScreen = () => {
             return;
         }
         console.log('Logging in with:', email, password);
+    };
+
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible); 
     };
 
     return (
@@ -33,7 +38,7 @@ const LoginScreen = () => {
                 placeholder="Password"
                 value={password}
                 onChangeText={setPassword}
-                secureTextEntry
+                secureTextEntry={!passwordVisible}
             />
 
             <Button title="Login" onPress={handleLogin} />
