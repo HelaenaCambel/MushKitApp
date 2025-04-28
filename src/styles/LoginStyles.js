@@ -21,9 +21,13 @@ const LoginStyles = StyleSheet.create({
         marginBottom: 15,
         paddingLeft: 10,
     },
+    registerContainer: {
+        flexDirection: 'row',  
+        justifyContent: 'center', 
+        marginTop: 20,
+    },
     registerText: {
         textAlign: 'center',
-        marginTop: 15,
     },
     link: {
         color: 'blue',
