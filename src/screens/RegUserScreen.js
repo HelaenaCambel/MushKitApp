@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
-import RegisterStyle from '../styles/RegisterStyles';
+import RegUserStyle from '../styles/RegUserStyles';
 
-const RegisterScreen = () => {
+const RegUserScreen = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -17,35 +17,35 @@ const RegisterScreen = () => {
     };
 
     return (
-        <View style={RegisterStyle.container}>
-            <Text style={RegisterStyle.header}>Register</Text>
+        <View style={RegUserStyle.container}>
+            <Text style={RegUserStyle.header}>Register</Text>
 
             <TextInput
-                style={RegisterStyle.input}
+                style={RegUserStyle.input}
                 placeholder="Email"
                 value={email}
                 onChangeText={setEmail}
             />
             <TextInput
-                style={RegisterStyle.input}
+                style={RegUserStyle.input}
                 placeholder="Password"
                 secureTextEntry
                 value={password}
                 onChangeText={setPassword}
             />
             <TextInput
-                style={RegisterStyle.input}
+                style={RegUserStyle.input}
                 placeholder="Confirm Password"
                 secureTextEntry
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
             />
 
-            <TouchableOpacity style={RegisterStyle.button} onPress={handleRegister}>
-                <Text style={RegisterStyle.buttonText}>Register</Text>
+            <TouchableOpacity style={RegUserStyle.button} onPress={handleRegister}>
+                <Text style={RegUserStyle.buttonText}>Register</Text>
             </TouchableOpacity>
         </View>
     );
 };
 
-export default RegisterScreen;
+export default RegUserScreen;
