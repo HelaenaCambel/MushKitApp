@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
-import RegUserStyle from '../styles/RegUserStyles';
 import { auth, db } from '../firebase'; 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
+import DelIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import RegUserStyle from '../styles/RegUserStyles';
 
 const RegUserScreen = () => {
     const [email, setEmail] = useState('');
@@ -11,6 +12,8 @@ const RegUserScreen = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [pin, setPin] = useState('');
     const [confirmPin, setConfirmPin] = useState('');
+    const [kitID, setKitID] = useState('');
+    const [kitName, setKitName] = useState('');
 
     const handleRegister = async () => {
         if (password !== confirmPassword) {
@@ -26,10 +29,12 @@ const RegUserScreen = () => {
         try {
             await createUserWithEmailAndPassword(auth, email, password, pin);
 
-            await setDoc(doc(db, "RegUsers", email), {
+            await setDoc(doc(db, "users", email), {
                 email,
                 password,
                 pin,  
+                kitID,
+                kitName,
             });
 
             Alert.alert('User registered successfully!');
@@ -38,6 +43,8 @@ const RegUserScreen = () => {
             setConfirmPassword('');
             setPin('');
             setConfirmPin('');
+            setKitID('');
+            setKitName('');
         } catch (error) {
             console.error(error);
             Alert.alert('Registration failed', error.message);
@@ -46,7 +53,7 @@ const RegUserScreen = () => {
 
     return (
         <View style={RegUserStyle.container}>
-            <Text style={RegUserStyle.header}>Register</Text>
+            <Text style={RegUserStyle.header}>User Profile</Text>
 
             <Text style={RegUserStyle.title}>Email</Text>
             <TextInput
@@ -74,27 +81,70 @@ const RegUserScreen = () => {
                 onChangeText={setConfirmPassword}
             />
 
-            <Text style={RegUserStyle.title}>PIN</Text>
-            <TextInput
-                style={RegUserStyle.input}
-                placeholder="Enter PIN"
-                secureTextEntry
-                value={pin}
-                onChangeText={setPin}
-            />
+            <View style={RegUserStyle.PINContainer}>
+                <View style={RegUserStyle.rowPIN}> 
+                    <Text style={RegUserStyle.title}>PIN</Text>
+                    <TextInput
+                        style={RegUserStyle.input}
+                        placeholder="Enter PIN"
+                        secureTextEntry
+                        value={pin}
+                        onChangeText={setPin}
+                    />
+                </View>
+                
+                <View style={RegUserStyle.rowRepeatPIN}>
+                    <Text style={RegUserStyle.title}>Repeat PIN</Text>
+                    <TextInput
+                        style={RegUserStyle.input}
+                        placeholder="Repeat PIN"
+                        secureTextEntry
+                        value={confirmPin}
+                        onChangeText={setConfirmPin}
+                    />                
+                </View>
+            </View>
 
-            <Text style={RegUserStyle.title}>Repeat Password</Text>
-            <TextInput
-                style={RegUserStyle.input}
-                placeholder="Repeat PIN"
-                secureTextEntry
-                value={confirmPin}
-                onChangeText={setConfirmPin}
-            />
+            <Text style={RegUserStyle.header}>MushKit Details</Text>
 
-            <TouchableOpacity style={RegUserStyle.button} onPress={handleRegister}>
-                <Text style={RegUserStyle.buttonText}>Register</Text>
-            </TouchableOpacity>
+            <View style={RegUserStyle.KitContainer}>
+                <View style={RegUserStyle.rowKitID}>
+                    <Text style={RegUserStyle.title}>MushKit ID#</Text>
+                    <TextInput
+                        style={RegUserStyle.input}
+                        placeholder="Enter MushKit ID#"
+                        value={kitID}
+                        onChangeText={setKitID}
+                    />
+                </View>
+
+                <View style={RegUserStyle.rowKitName}>
+                    <Text style={RegUserStyle.title}>MushKit Name</Text>
+                    <TextInput
+                        style={RegUserStyle.input}
+                        placeholder="Enter MushKit Name"
+                        value={kitName}
+                        onChangeText={setKitName}
+                    />
+                </View>
+
+                <View style={RegUserStyle.rowDelIcon}>
+                    <TouchableOpacity onPress={() => setKitName('')}>
+                        <DelIcon name="delete" size={24} color="red" />
+                    </TouchableOpacity>
+                </View>
+            </View>
+
+            <View style={RegUserStyle.rowContainer}>
+                <TouchableOpacity style={[RegUserStyle.AddButton, { flex: 1, marginRight: 5 }]} onPress={handleRegister}>
+                    <Text style={RegUserStyle.buttonText}>Add MushKit</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[RegUserStyle.RegButton, { flex: 1, marginLeft: 5 }]} onPress={handleRegister}>
+                    <Text style={RegUserStyle.buttonText}>Register</Text>
+                </TouchableOpacity>
+            </View>
+
         </View>
     );
 };

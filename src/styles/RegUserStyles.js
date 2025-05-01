@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const RegUserStyle = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         padding: 20,
         backgroundColor: '#fff',
@@ -26,8 +26,55 @@ const RegUserStyle = StyleSheet.create({
         borderRadius: 5,
         marginBottom: 15,
         paddingLeft: 10,
+    }, 
+    PINContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+        paddingBottom: 25,
+    }, 
+    rowPIN: {
+        flex: 1,
+        marginRight: 5,
     },
-    button: {
+    rowRepeatPIN: {
+        flex: 1,
+        marginLeft: 5,
+    }, 
+    KitContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+        paddingBottom: 25,
+    }, 
+    rowKitID: {
+        flex: 0.8,
+        marginRight: 5,
+    },
+    rowKitName: {
+        flex: 1,
+        marginHorizontal: 5,
+    },
+    rowDelIcon: {
+        alignItems: 'center',
+        paddingTop: 35, 
+        flex: 0.2,
+    },
+    rowContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+        paddingBottom: 25,
+    }, 
+    AddButton: {
+        backgroundColor: '#6495ed',
+        width: '100%',
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 5,
+    },
+    RegButton: {
         backgroundColor: '#4CAF50',
         width: '100%',
         height: 50,
