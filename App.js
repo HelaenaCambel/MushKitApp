@@ -16,7 +16,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegUserScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
@@ -24,7 +24,6 @@ export default function App() {
         <Stack.Screen name="MushKit Details" component={KitDetails} />
         <Stack.Screen name="User Profile" component={ProfileScreen} />
       </Stack.Navigator>
-      <StatusBar style="auto" />
     </NavigationContainer>
   );
 }

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, Button } from 'react-native';
 import { auth, db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
-import SideNavBar from '../static/SideNavBar';
+import NavBar from '../static/NavBar';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ProfileScreen = () => {
     const [userData, setUserData] = useState(null);
@@ -33,21 +34,21 @@ const ProfileScreen = () => {
     }
 
     return (
-        <View style={styles.container}>
-            <SideNavBar /> 
-            <View style={styles.mainContent}>
-                <Text style={styles.header}>User Profile</Text>
-                <Text>Email: {userData.email}</Text>
-                <Text>Password: {userData.password}</Text>
-                <Text>Created At: {userData.createdAt?.toDate?.().toString() || 'N/A'}</Text>
-
+        <SafeAreaView style={styles.safeArea}>
+            <View style={styles.container}>
+                <NavBar />
+                <View style={styles.mainContent}>
+                    <Text>Email: {userData.email}</Text>
+                    <Text>Password: {userData.password}</Text>
+                </View>
             </View>
-        </View>
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
-    container: { flex: 1, flexDirection: 'row' }, 
+    safeArea: { flex: 1, backgroundColor: '#fff', },
+    container: { flex: 1, justifyContent: 'space-between', },
     mainContent: { flex: 1, padding: 24, justifyContent: 'center' },
     header: { fontSize: 24, marginBottom: 20, fontWeight: 'bold' },
 });
