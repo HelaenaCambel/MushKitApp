@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
 import LoginStyle from '../styles/LoginStyles';
 
 const LoginScreen = () => {
@@ -9,12 +11,20 @@ const LoginScreen = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const navigation = useNavigation(); 
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         if (!email || !password) {
             Alert.alert('Error', 'Please fill in both fields');
             return;
         }
-        console.log('Logging in with:', email, password);
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            console.log('Login successful:', email);
+            navigation.replace('Profile'); 
+        } catch (error) {
+            console.error('Login error:', error);
+            Alert.alert('Login Failed', error.message);
+        }
     };
 
     const togglePasswordVisibility = () => {
