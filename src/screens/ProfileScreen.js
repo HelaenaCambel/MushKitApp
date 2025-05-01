@@ -40,6 +40,7 @@ const ProfileScreen = () => {
                 <View style={styles.mainContent}>
                     <Text>Email: {userData.email}</Text>
                     <Text>Password: {userData.password}</Text>
+                    <Text>PIN: {userData.pin}</Text>
                 </View>
             </View>
         </SafeAreaView>
