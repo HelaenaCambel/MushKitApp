@@ -14,7 +14,7 @@ const ProfileScreen = () => {
         const fetchUserData = async () => {
             const user = auth.currentUser;
             if (user) {
-                const docRef = doc(db, 'RegUsers', user.email);
+                const docRef = doc(db, 'users', user.email);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     setUserData(docSnap.data());
