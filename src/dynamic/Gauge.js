@@ -42,7 +42,7 @@ const Gauge = ({ label, value, unit, maxValue = 100 }) => {
                 width={15}
                 fill={(value / maxValue) * 100}
                 tintColor={getColorByValue(value)}
-                backgroundColor="#3d5875"
+                backgroundColor="#ccc"
                 rotation={0}
                 lineCap="round"
             >
@@ -61,5 +61,5 @@ export default Gauge;
 const styles = StyleSheet.create({
     container: { alignItems: 'center', marginVertical: 20 },
     label: { fontSize: 18, fontWeight: '600', color: '#333', marginBottom: 10 },
-    value: { fontSize: 24, fontWeight: 'bold', color: '#00e0ff' },
+    value: { fontSize: 24, fontWeight: 'bold' },
 });
