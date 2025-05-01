@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, Button } from 'react-native';
 import { auth, db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
-import { signOut } from 'firebase/auth';
-import { useNavigation } from '@react-navigation/native';
+import SideNavBar from '../static/SideNavBar';
 
 const ProfileScreen = () => {
     const [userData, setUserData] = useState(null);
-    const navigation = useNavigation();
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -26,11 +24,6 @@ const ProfileScreen = () => {
         fetchUserData();
     }, []);
 
-    const handleLogout = async () => {
-        await signOut(auth);
-        navigation.replace('Login');
-    };
-
     if (!userData) {
         return (
             <View style={styles.container}>
@@ -41,19 +34,23 @@ const ProfileScreen = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>User Profile</Text>
-            <Text>Email: {userData.email}</Text>
-            <Text>Password: {userData.password}</Text>
-            <Text>Created At: {userData.createdAt?.toDate?.().toString() || 'N/A'}</Text>
+            <SideNavBar /> 
+            <View style={styles.mainContent}>
+                <Text style={styles.header}>User Profile</Text>
+                <Text>Email: {userData.email}</Text>
+                <Text>Password: {userData.password}</Text>
+                <Text>Created At: {userData.createdAt?.toDate?.().toString() || 'N/A'}</Text>
 
-            <Button title="Logout" onPress={handleLogout} />
+            </View>
         </View>
     );
 };
 
-export default ProfileScreen;
-
 const styles = StyleSheet.create({
-    container: { flex: 1, padding: 24, justifyContent: 'center' },
+    container: { flex: 1, flexDirection: 'row' }, 
+    mainContent: { flex: 1, padding: 24, justifyContent: 'center' },
     header: { fontSize: 24, marginBottom: 20, fontWeight: 'bold' },
 });
+
+
+export default ProfileScreen;
