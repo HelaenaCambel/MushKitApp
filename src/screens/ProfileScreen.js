@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, Button } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import MushIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { auth, db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
-import NavBar from '../static/NavBar';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import NavBar from '../static/NavBar';
 
 const ProfileScreen = () => {
     const [userData, setUserData] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -20,16 +22,26 @@ const ProfileScreen = () => {
                     console.log('No such document!');
                 }
             }
+
+            setTimeout(() => {
+                setLoading(false);
+            }, 200);
         };
 
         fetchUserData();
     }, []);
 
-    if (!userData) {
+    if (loading) {
         return (
-            <View style={styles.container}>
-                <ActivityIndicator size="large" color="#2e86de" />
-            </View>
+            <SafeAreaView style={styles.safeArea}>
+                <View style={styles.container}>
+                    <NavBar />
+                    <View style={styles.mainContent}>
+                        <MushIcon name="mushroom" size={50} color="#1e1e2f" />
+                        <Text>Loading...</Text>
+                    </View>
+                </View>
+            </SafeAreaView>
         );
     }
 
@@ -48,11 +60,10 @@ const ProfileScreen = () => {
 };
 
 const styles = StyleSheet.create({
-    safeArea: { flex: 1, backgroundColor: '#fff', },
-    container: { flex: 1, justifyContent: 'space-between', },
-    mainContent: { flex: 1, padding: 24, justifyContent: 'center' },
+    safeArea: { flex: 1, backgroundColor: '#fff' },
+    container: { flex: 1, justifyContent: 'space-between' },
+    mainContent: { flex: 1, padding: 24, justifyContent: 'center', alignItems: 'center' },
     header: { fontSize: 24, marginBottom: 20, fontWeight: 'bold' },
 });
-
 
 export default ProfileScreen;
