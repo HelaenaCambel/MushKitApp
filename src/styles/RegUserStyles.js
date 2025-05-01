@@ -11,7 +11,7 @@ const RegUserStyle = StyleSheet.create({
     header: {
         fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 20,
+        marginBottom: 10,
     },
     title: {
         fontSize: 16,
