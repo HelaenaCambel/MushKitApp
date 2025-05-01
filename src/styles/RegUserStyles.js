@@ -13,6 +13,11 @@ const RegUserStyle = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 20,
     },
+    title: {
+        fontSize: 16,
+        alignSelf: 'flex-start',
+        marginLeft: 1,
+    },
     input: {
         width: '100%',
         height: 50,
