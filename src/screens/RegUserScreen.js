@@ -86,11 +86,29 @@ const RegUserScreen = () => {
                 <View style={RegUserStyle.KitContainer} key={index}>
                     <View style={RegUserStyle.rowKitID}>
                         <Text style={RegUserStyle.title}>MushKit ID#</Text>
-                        <TextInput style={RegUserStyle.input} value={kit.kitID} editable={false} />
+                        <TextInput
+                            style={RegUserStyle.input}
+                            value={kit.kitID}
+                            editable={true}  
+                            onChangeText={(text) => {
+                                const updatedKits = [...mushKits];
+                                updatedKits[index].kitID = text;
+                                setMushKits(updatedKits);
+                            }}
+                        />
                     </View>
                     <View style={RegUserStyle.rowKitName}>
                         <Text style={RegUserStyle.title}>MushKit Name</Text>
-                        <TextInput style={RegUserStyle.input} value={kit.kitName} editable={false} />
+                        <TextInput
+                            style={RegUserStyle.input}
+                            value={kit.kitName}
+                            editable={true} 
+                            onChangeText={(text) => {
+                                const updatedKits = [...mushKits];
+                                updatedKits[index].kitName = text;
+                                setMushKits(updatedKits);
+                            }}
+                        />
                     </View>
                     <View style={RegUserStyle.rowDelIcon}>
                         <TouchableOpacity onPress={() => handleDeleteKit(index)}>
